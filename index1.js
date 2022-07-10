@@ -17,17 +17,27 @@ function liadd() {
     li.classList.add("list-group-item");
     ul1.appendChild(li);
     input.value = "";
+    saveDate();
 
   }
+}
+
+
+function saveDate() {
+  const lists = document.querySelectorAll("li");
+  console.log(lists);
 
 }
 
 
-//   空の状態でエンターを押してもliが追加されない様にしたい条件分岐　　　　　//
-//もしformが空だったらliタグを追加しないとしたい=formに値が入力された時だけliadd関数の処理をしたい
-//その前にinput1.valueを変数（let)宣言するtodoText変数、これによりliがとってくるtextも変数化する
-//let todoText = input1.value
-//li.innerText = todoText;
-//  if (todoText.length > 0)
-//この答えはtrue falseで帰ってくる
-//if (todoText)これでもいいらしい→詳しくは暗黙的型変換
+
+///   ローカルストレージ（ブラウザにデータを保存しておく仕組み）
+//saveDate();を呼び出す
+//saveDate();関数を作成
+//画面に表示されたデータ＝HTML=document
+//画面に表示されたデータを取る＝documentをとるdocument.querySelectorAll("li")※ミス>最初getElementByIDを指定してしまったがliはidタグではないのでquerySelectorAllらしい。特徴は配列になる
+//それを定数listsに入れる
+//検証ツールのconsolにてconst lists = document.querySelectorAll("li");
+//配列を取り出して見るlists[0]
+//lists[0].innerTextをすると配列のテキスト情報が取れる
+//配列のテキスト情報を全て取得するには？
