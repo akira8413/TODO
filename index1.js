@@ -25,19 +25,25 @@ function liadd() {
 
 function saveDate() {
   const lists = document.querySelectorAll("li");
-  console.log(lists);
+  let todos = [];
+  lists.forEach(list => {
+    todos.push(list.innerText);
+  })
+
 
 }
 
 
 
-///   ローカルストレージ（ブラウザにデータを保存しておく仕組み）
-//saveDate();を呼び出す
-//saveDate();関数を作成
-//画面に表示されたデータ＝HTML=document
-//画面に表示されたデータを取る＝documentをとるdocument.querySelectorAll("li")※ミス>最初getElementByIDを指定してしまったがliはidタグではないのでquerySelectorAllらしい。特徴は配列になる
-//それを定数listsに入れる
-//検証ツールのconsolにてconst lists = document.querySelectorAll("li");
-//配列を取り出して見るlists[0]
-//lists[0].innerTextをすると配列のテキスト情報が取れる
-//配列のテキスト情報を全て取得するには？
+///    ループ　　　　　　　　////
+//配列arrayを定義
+//const array =[1,3,5];
+
+//配列arrayの値をvalueに入れる
+//array.forEach(value => {
+//value * 2の値を出力
+// console.log(value * 2);});
+//2,6,10
+
+//console.log(list.innerText);この処理を配列にまとめる  let todos = [];
+//todosにlist.innerText（formからsubmitされliタグが作られブラウザに表示されている値）を追加していく
