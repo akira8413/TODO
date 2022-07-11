@@ -1,22 +1,31 @@
 const form1 = document.getElementById("form");
 const input1 = document.getElementById("input");
 const ul1 = document.getElementById("ul");
+const todo1 = JSON.parse(localStorage.getItem("todo_key"));
 
+if (todo1) {
+  todo1.forEach(todo => {
+    li_add(todo);
+  })
+}
 
-form.addEventListener('submit', function (event) {
+form1.addEventListener('submit', function (event) {
   event.preventDefault();
   console.log(input1.value);
-  liadd();
+  li_add();
 });
 
-function liadd() {
+function li_add(todo1) {
   let todoText = input1.value
+  if (todo1) {
+    todoText = todo1;
+  }
   if (todoText.length > 0) {
     const li = document.createElement("li");
     li.innerText = todoText;
     li.classList.add("list-group-item");
     ul1.appendChild(li);
-    input.value = "";
+    input1.value = "";
     saveDate();
 
   }
@@ -28,22 +37,25 @@ function saveDate() {
   let todos = [];
   lists.forEach(list => {
     todos.push(list.innerText);
-  })
-
-
+  });
+  localStorage.setItem('todo_key', JSON.stringify(todos));
 }
 
 
+//今まではリロードを押すとデータが初期化されていたのでプラウザにデータを保存する仕組み（ローカルストレージ）を活用したい.JSON形式で
+//検証アプリのapplicationのlocalstrageに変数todosをtodos keyに保管する
+//localStorage.setItem("todos key", JSON.stringify(todos));
+//           データの保存             //
+// localStorage.setItem(’key名’,'値');
 
-///    ループ　　　　　　　　////
-//配列arrayを定義
-//const array =[1,3,5];
+//           データの取得             //
+// localStorage.getItem(’key名’);
+//localStorageを取得して定数化
+//const todos1 = JSON.parse(localStorage.getItem(todoskey));
+//todos1が空じゃなかったら liタグを追加
+//if (todos1) {todos1.forEach(todo => {liadd(todo);})}
+//liadd()に引数を入れる
+//todoがあった時は変数todoTextにtodoを入れる
 
-//配列arrayの値をvalueに入れる
-//array.forEach(value => {
-//value * 2の値を出力
-// console.log(value * 2);});
-//2,6,10
-
-//console.log(list.innerText);この処理を配列にまとめる  let todos = [];
-//todosにlist.innerText（formからsubmitされliタグが作られブラウザに表示されている値）を追加していく
+//ここでタイポconst todo1 = JSON.parse(localStorage.getItem("todo_key"));>""がなかった
+//そして関数li_addの引数にtodosがはいってなかった
