@@ -3,6 +3,8 @@ const input1 = document.getElementById("input");
 const ul1 = document.getElementById("ul");
 const todo1 = JSON.parse(localStorage.getItem("todo_key"));
 
+
+
 if (todo1) {
   todo1.forEach(todo => {
     li_add(todo);
@@ -24,6 +26,14 @@ function li_add(todo1) {
     const li = document.createElement("li");
     li.innerText = todoText;
     li.classList.add("list-group-item");
+    li.addEventListener("contextmenu", function (event) {
+      event.preventDefault();
+      li.remove();
+      saveDate();
+    });
+    li.addEventListener("click", function () {
+      li.classList.toggle("text-decoration-line-through");
+    });
     ul1.appendChild(li);
     input1.value = "";
     saveDate();
@@ -42,20 +52,15 @@ function saveDate() {
 }
 
 
-//今まではリロードを押すとデータが初期化されていたのでプラウザにデータを保存する仕組み（ローカルストレージ）を活用したい.JSON形式で
-//検証アプリのapplicationのlocalstrageに変数todosをtodos keyに保管する
-//localStorage.setItem("todos key", JSON.stringify(todos));
-//           データの保存             //
-// localStorage.setItem(’key名’,'値');
+//TODOを削除できる機能
+//liを右クリックのされたらfunctionを実行でふぉるといべんとを発生させない様にして、li.removeで削除する。関数saveDate();でlocalstrageの方も削除
+//li.addEventListener("contextmenu",function
+//(event){
+//  event.preventDefault();
+//  li.remove();
+//  saveDate();
+//});
+//  event.preventDefault();は発生させたくないイベントがある時だけ
 
-//           データの取得             //
-// localStorage.getItem(’key名’);
-//localStorageを取得して定数化
-//const todos1 = JSON.parse(localStorage.getItem(todoskey));
-//todos1が空じゃなかったら liタグを追加
-//if (todos1) {todos1.forEach(todo => {liadd(todo);})}
-//liadd()に引数を入れる
-//todoがあった時は変数todoTextにtodoを入れる
-
-//ここでタイポconst todo1 = JSON.parse(localStorage.getItem("todo_key"));>""がなかった
-//そして関数li_addの引数にtodosがはいってなかった
+//  li.classList.toggle("text-decoration-line-through");
+//toggle=liにtext-decoration-line-throughというclassがついてなかったらクラスをつけるし、ついていたらなにもしない。という風に分岐できる。若干ifに似てる感じ
